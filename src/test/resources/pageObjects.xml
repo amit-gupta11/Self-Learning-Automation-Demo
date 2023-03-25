@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<app name="Self Learning">
+    <page name='URL'>
+        <element name="GoogleURL" by="xpath" identifier="https://google.com"/>
+        <element name="FacebookURL" by="xpath" identifier="https://facebook.com"/>
+    </page>
+</app>
