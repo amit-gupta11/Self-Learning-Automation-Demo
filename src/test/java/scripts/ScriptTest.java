@@ -1,13 +1,13 @@
 package scripts;
 
-import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 import reusable.Base;
 
 public class ScriptTest extends Base {
-    @AfterClass
+    @AfterTest
     public void tearDown() {
-        driver.quit();
+       driver.quit();
     }
 
     @Test

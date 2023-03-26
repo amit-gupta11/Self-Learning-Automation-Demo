@@ -5,7 +5,6 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
-import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -17,7 +16,7 @@ import java.io.IOException;
 
 import static reusable.Base.driver;
 
-public class TestListeners implements ITestListener  {
+public class TestListeners implements ITestListener {
     ExtentReports extentReports;
     ExtentTest extentTest;
     String testName;
@@ -42,15 +41,8 @@ public class TestListeners implements ITestListener  {
 
     @Override
     public void onTestFailure(ITestResult result) {
-        System.out.println("Screenshot Taken");
-        //This is to add driver for taking screenshot
-        try {
-            driver= (WebDriver) result.getTestClass().getRealClass().getDeclaredField("driver").get(result.getInstance());
-        } catch (IllegalAccessException | NoSuchFieldException e) {
-            e.printStackTrace();
-        }
         String destinationScreenshotPath = Reusable.takeFailTestScreenshot(driver,testName);
-        extentTest.addScreenCaptureFromPath(destinationScreenshotPath);
+        extentTest.addScreenCaptureFromPath(destinationScreenshotPath).log(Status.INFO,"Screen Shot Taken");
         extentTest.log(Status.INFO,result.getThrowable());
         extentTest.log(Status.FAIL,MarkupHelper.createLabel(testName + "- Test Case Failed", ExtentColor.RED));
     }
