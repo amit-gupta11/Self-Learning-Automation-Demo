@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.LoggingPreferences;
 import org.testng.annotations.BeforeClass;
 
 import java.io.File;
@@ -11,6 +13,7 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Properties;
+import java.util.logging.Level;
 
 @SuppressWarnings("rawtypes")
 public class Base extends PageObjects {
@@ -33,6 +36,9 @@ public class Base extends PageObjects {
                 options.addArguments("--window-size=3840,2160");
             }
             options.addArguments(browserArguments());
+            LoggingPreferences logPrefs = new LoggingPreferences();
+            logPrefs.enable(LogType.BROWSER, Level.ALL);
+            options.setCapability("goog:loggingPrefs", logPrefs);
             driver = new ChromeDriver(options);
         } else if (browser_name.equalsIgnoreCase("edge")) {
             driver = new EdgeDriver();
